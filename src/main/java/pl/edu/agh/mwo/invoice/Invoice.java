@@ -31,6 +31,9 @@ public class Invoice {
 	}
 
 	public BigDecimal getTotal() {
+		if (products == null) {
+			return BigDecimal.ZERO;
+		}
 		return null;
 	}
 }
