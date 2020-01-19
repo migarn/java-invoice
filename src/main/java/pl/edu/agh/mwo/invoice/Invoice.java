@@ -1,13 +1,16 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-	private LinkedHashMap<Product, Integer> products;
+	private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
 	public void addProduct(Product product) {
 		addProduct(product, 1);;
@@ -21,7 +24,10 @@ public class Invoice {
 		if (products == null) {
 			return BigDecimal.ZERO;
 		}
-		return null;
+		BigDecimal subtotal = new BigDecimal.ZERO;
+		for (Product product : products.) {
+			
+		}
 
 	}
 
