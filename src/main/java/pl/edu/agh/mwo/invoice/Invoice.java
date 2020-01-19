@@ -24,6 +24,9 @@ public class Invoice {
 	}
 
 	public BigDecimal getTax() {
+		if (products == null) {
+			return BigDecimal.ZERO;
+		}
 		return null;
 	}
 
