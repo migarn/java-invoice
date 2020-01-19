@@ -17,6 +17,9 @@ public class Invoice {
 	}
 
 	public BigDecimal getSubtotal() {
+		if (products == null) {
+			return BigDecimal.ZERO;
+		}
 		return null;
 	}
 
