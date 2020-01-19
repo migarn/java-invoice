@@ -10,22 +10,19 @@ public class Invoice {
 	private LinkedHashMap<Product, Integer> products;
 
 	public void addProduct(Product product) {
-		// TODO: implement
+		addProduct(product, 1);;
 	}
 
 	public void addProduct(Product product, Integer quantity) {
-		// TODO: implement
+		products.put(product, quantity);
 	}
 
 	public BigDecimal getSubtotal() {
 		if (products == null) {
 			return BigDecimal.ZERO;
 		}
-		BigDecimal subtotal = BigDecimal.ZERO;
-		for (Product product : products) {
-			subtotal = subtotal.add(product.getPrice());
-		}
-		return subtotal;
+		return null;
+
 	}
 
 	public BigDecimal getTax() {
