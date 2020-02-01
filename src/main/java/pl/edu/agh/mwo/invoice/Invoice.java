@@ -16,7 +16,10 @@ public class Invoice {
 	}
 
 	public void addProduct(Product product, Integer quantity) {
-		if (products.containsKey(product)) {
+		if (quantity <= 0) {
+			throw new IllegalArgumentException("Quantity must be positive!");
+		}
+		else if (products.containsKey(product)) {
 			products.replace(product, products.get(product) + quantity);
 		}
 		else {
