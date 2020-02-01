@@ -2,7 +2,6 @@ package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -13,11 +12,16 @@ public class Invoice {
 	private Map<Product, Integer> products = new HashMap<>();
 
 	public void addProduct(Product product) {
-		addProduct(product, 1);;
+		addProduct(product, 1);
 	}
 
 	public void addProduct(Product product, Integer quantity) {
-		
+		if (products.containsKey(product)) {
+			products.replace(product, products.get(product) + quantity);
+		}
+		else {
+			products.put(product, quantity);
+		}
 	}
 
 	public BigDecimal getSubtotal() {
