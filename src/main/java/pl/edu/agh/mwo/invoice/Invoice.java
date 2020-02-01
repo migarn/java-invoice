@@ -3,9 +3,6 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-
-
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
@@ -53,6 +50,6 @@ public class Invoice {
 		if (products.isEmpty()) {
 			return BigDecimal.ZERO;
 		}
-		return null;
+		return getSubtotal().add(getTax());
 	}
 }
