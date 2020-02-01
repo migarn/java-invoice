@@ -42,7 +42,11 @@ public class Invoice {
 		if (products.isEmpty()) {
 			return BigDecimal.ZERO;
 		}
-		return null;
+		BigDecimal tax = BigDecimal.ZERO; 
+		for (Product product : products.keySet()) {
+			tax = tax.add(product.getPrice().multiply(product.getTaxPercent()).multiply(BigDecimal.valueOf(products.get(product))));
+		}
+		return tax;
 	}
 
 	public BigDecimal getTotal() {
