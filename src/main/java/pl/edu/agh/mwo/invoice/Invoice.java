@@ -44,6 +44,6 @@ public class Invoice {
     }
     
     public int getNumber() {
-    	return this.number;
+        return this.number;
     }
 }
