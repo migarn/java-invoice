@@ -124,4 +124,10 @@ public class InvoiceTest {
     	int number2 = new Invoice().getNumber();
     	Assert.assertEquals(number, number2 - 1);
     }
+    
+    @Test
+    public void testPrintHasResult() {
+        String printResult = invoice.print();
+        Assert.assertTrue(printResult != null);
+    }
 }
