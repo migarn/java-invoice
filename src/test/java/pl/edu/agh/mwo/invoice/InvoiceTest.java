@@ -74,7 +74,7 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testInvoiceHasPropoerSubtotalWithQuantityMoreThanOne() {
+    public void testInvoiceHasProperSubtotalWithQuantityMoreThanOne() {
         // 2x kubek - price: 10
         invoice.addProduct(new TaxFreeProduct("Kubek", new BigDecimal("5")), 2);
         // 3x kozi serek - price: 30
@@ -134,6 +134,19 @@ public class InvoiceTest {
     @Test
     public void testPrintEmptyInvoice() {
         String printResult = invoice.print();
-        Assert.assertEquals(printResult, invoice.getNumber() + ":\nLiczba pozycji: 0");
+        Assert.assertEquals(printResult, "Faktura " + invoice.getNumber() + ":\nLiczba pozycji: 0");
+    }
+    
+    @Test
+    public void testPrintNotEmptyInvoice() {        
+        invoice.addProduct(new TaxFreeProduct("Kubek", new BigDecimal("5")), 2);
+        invoice.addProduct(new DairyProduct("Kozi Serek", new BigDecimal("10")), 3);
+        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+        String printResult = invoice.print();
+        String expectedResult = "Faktura " + invoice.getNumber() +  ":\n- Kubek, sztuk: 2, cena netto za sztukę: 5 PLN"
+                + "\n- Kozi Serek, sztuk: 3, cena netto za sztukę: 10 PLN"
+                + "\n- Pinezka, sztuk: 1000, cena netto za sztukę: 0.01 PLN"
+                + "\nLiczba pozycji: 3";
+        Assert.assertEquals(printResult, expectedResult);
     }
 }
