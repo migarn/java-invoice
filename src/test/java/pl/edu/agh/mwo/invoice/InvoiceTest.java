@@ -130,4 +130,10 @@ public class InvoiceTest {
         String printResult = invoice.print();
         Assert.assertTrue(printResult != null);
     }
+    
+    @Test
+    public void testPrintEmptyInvoice() {
+        String printResult = invoice.print();
+        Assert.assertEquals(printResult, invoice.getNumber() + ":\nLiczba pozycji: 0");
+    }
 }

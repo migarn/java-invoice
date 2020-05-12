@@ -48,6 +48,9 @@ public class Invoice {
     }
     
     public String print() {
-        return "" + this.number;
+        StringBuilder result = new StringBuilder();
+        result.append(this.number + ":\n");
+        result.append("Liczba pozycji: " + this.products.size());
+        return result.toString();
     }
 }

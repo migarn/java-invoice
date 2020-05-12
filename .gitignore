@@ -1,6 +1,7 @@
 /target
 /.settings
 /bin
+/src/main/java/pl/edu/agh/mwo/invoice/Demo.java
 .classpath
 .project
 .idea
