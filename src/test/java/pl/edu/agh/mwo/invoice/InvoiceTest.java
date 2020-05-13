@@ -138,7 +138,16 @@ public class InvoiceTest {
     }
     
     @Test
-    public void testPrintNotEmptyInvoice() {        
+    public void testPrintInvoiceWithOneProduct() {        
+        invoice.addProduct(new TaxFreeProduct("Warzywa", new BigDecimal("199.99")));
+        String printResult = invoice.print();
+        String expectedResult = "Faktura " + invoice.getNumber() +  ":\n- Warzywa, sztuk: 1, cena netto za sztukę: 199.99 PLN"
+                + "\nLiczba pozycji: 1";
+        Assert.assertEquals(printResult, expectedResult);
+    }
+    
+    @Test
+    public void testPrintInvoiceWithManyProducts() {        
         invoice.addProduct(new TaxFreeProduct("Kubek", new BigDecimal("5")), 2);
         invoice.addProduct(new DairyProduct("Kozi Serek", new BigDecimal("10")), 3);
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
