@@ -21,18 +21,45 @@ public abstract class Product {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public BigDecimal getPrice() {
-        return price;
+        return this.price;
     }
 
     public BigDecimal getTaxPercent() {
-        return taxPercent;
+        return this.taxPercent;
     }
 
     public BigDecimal getPriceWithTax() {
-        return price.multiply(taxPercent).add(price);
+        return this.price.multiply(this.taxPercent).add(this.price);
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (object == null || object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Product product = (Product) object;
+        if (this.name.equals(product.getName()) && this.price.equals(product.getPrice())
+                && this.taxPercent.equals(product.getTaxPercent())) {
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.price == null) ? 0 : this.price.hashCode());
+        result = prime * result + ((this.taxPercent == null) ? 0 : this.taxPercent.hashCode());
+        return result;
     }
 }

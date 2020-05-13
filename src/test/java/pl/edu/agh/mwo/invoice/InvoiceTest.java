@@ -158,4 +158,16 @@ public class InvoiceTest {
                 + "\nLiczba pozycji: 3";
         Assert.assertEquals(printResult, expectedResult);
     }
+    
+    @Test
+    public void testInvoiceHasNoDuplicatesForTheSameProduct() {
+        invoice.addProduct(new TaxFreeProduct("Warzywa", new BigDecimal("199.99")));
+        invoice.addProduct(new TaxFreeProduct("Warzywa", new BigDecimal("199.99")));
+        String printResult = invoice.print();
+        String expectedResult = "Faktura " + invoice.getNumber() +  ":\n- Warzywa, sztuk: 2, cena netto za sztukę: 199.99 PLN"
+                + "\nLiczba pozycji: 1";
+        Assert.assertEquals(printResult, expectedResult);
+    }
+    
+    // ta sama nazwa inna cena?
 }
