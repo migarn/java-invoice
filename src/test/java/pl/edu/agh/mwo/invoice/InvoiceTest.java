@@ -169,5 +169,27 @@ public class InvoiceTest {
         Assert.assertEquals(printResult, expectedResult);
     }
     
+    @Test
+    public void testNoMergeForProductsWithDifferentsPrices() {
+        invoice.addProduct(new TaxFreeProduct("Warzywa", new BigDecimal("199.99")));
+        invoice.addProduct(new TaxFreeProduct("Warzywa", new BigDecimal("198.99")));
+        String printResult = invoice.print();
+        String expectedResult = "Faktura " + invoice.getNumber() +  ":\n- Warzywa, sztuk: 1, cena netto za sztukę: 199.99 PLN"
+                + "\n- Warzywa, sztuk: 1, cena netto za sztukę: 198.99 PLN"
+        		+ "\nLiczba pozycji: 2";
+        Assert.assertEquals(printResult, expectedResult);
+    }
+    
+    @Test
+    public void testNoMergeForProductsWithDifferentTax() {
+        invoice.addProduct(new TaxFreeProduct("Warzywa", new BigDecimal("199.99")));
+        invoice.addProduct(new OtherProduct("Warzywa", new BigDecimal("199.99")));
+        String printResult = invoice.print();
+        String expectedResult = "Faktura " + invoice.getNumber() +  ":\n- Warzywa, sztuk: 1, cena netto za sztukę: 199.99 PLN"
+                + "\n- Warzywa, sztuk: 1, cena netto za sztukę: 199.99 PLN"
+        		+ "\nLiczba pozycji: 2";
+        Assert.assertEquals(printResult, expectedResult);
+    }
+    
     // ta sama nazwa inna cena?
 }
