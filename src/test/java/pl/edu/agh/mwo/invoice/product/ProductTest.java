@@ -60,4 +60,10 @@ public class ProductTest {
         Product product = new BottleOfWine("Kadarka", new BigDecimal("5"));
         Assert.assertThat(new BigDecimal("11.71"), Matchers.comparesEqualTo(product.getPriceWithTax()));
     }
+    
+    @Test
+    public void testFuelCanisterWithTaxAndExcise() {
+        Product product = new FuelCanister("95", new BigDecimal("2"));
+        Assert.assertThat(new BigDecimal("8.02"), Matchers.comparesEqualTo(product.getPriceWithTax()));
+    }
 }

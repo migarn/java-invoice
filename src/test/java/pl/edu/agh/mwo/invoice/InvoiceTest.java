@@ -202,4 +202,6 @@ public class InvoiceTest {
         		+ "\nLiczba pozycji: 2";
         Assert.assertEquals(printResult, expectedResult);
     }
+    
+    //faktury z winem i paliwem
 }
