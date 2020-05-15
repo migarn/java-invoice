@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class BottleOfWine extends Product {
     private BigDecimal excise;
 
-    protected BottleOfWine(String name, BigDecimal price) {
+    public BottleOfWine(String name, BigDecimal price) {
         super(name, price, new BigDecimal("0.23"));
         excise = new BigDecimal("5.56");
     }

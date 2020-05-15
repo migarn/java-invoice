@@ -6,9 +6,10 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import pl.edu.agh.mwo.invoice.Invoice;
+import pl.edu.agh.mwo.invoice.product.BottleOfWine;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
+import pl.edu.agh.mwo.invoice.product.FuelCanister;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
 import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
@@ -203,5 +204,16 @@ public class InvoiceTest {
         Assert.assertEquals(printResult, expectedResult);
     }
     
-    //faktury z winem i paliwem
+    @Test
+    public void testInvoiceWithBottleOfWineAndFuelCanister() {
+        invoice.addProduct(new TaxFreeProduct("Warzywa", new BigDecimal("199.99")), 2);
+        invoice.addProduct(new BottleOfWine("Kadarka", new BigDecimal("5")), 3);
+        invoice.addProduct(new FuelCanister("95", new BigDecimal("2")));
+        String printResult = invoice.print();
+        String expectedResult = "Faktura " + invoice.getNumber() +  ":\n- Warzywa, sztuk: 2, cena netto za sztukę: 199.99 PLN"
+                + "\n- Kadarka, sztuk: 3, cena netto za sztukę: 5 PLN"
+                + "\n- 95, sztuk: 1, cena netto za sztukę: 2 PLN"
+        		+ "\nLiczba pozycji: 3";
+        Assert.assertEquals(printResult, expectedResult);
+    }
 }

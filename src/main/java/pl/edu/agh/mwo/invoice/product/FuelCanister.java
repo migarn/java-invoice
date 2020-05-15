@@ -11,7 +11,7 @@ public class FuelCanister extends Product {
     private final Month roadmansMonth = Month.APRIL;
     private final int roadmansDay = 26;
 
-    protected FuelCanister(String name, BigDecimal price) {
+    public FuelCanister(String name, BigDecimal price) {
         super(name, price, new BigDecimal("0.23"));
         this.excise = new BigDecimal("5.56");
         setClock(Clock.systemDefaultZone());
