@@ -28,6 +28,6 @@ public class FuelCanister extends Product {
                 && currentTime.getDayOfMonth() == this.roadmansDay) {
             return this.getPrice();
         }
-        return this.getPrice().multiply(this.getTaxPercent()).add(this.getPrice()).add(excise);
+        return this.getPrice().multiply(this.getTaxPercent()).add(this.getPrice()).add(this.excise);
     }
 }

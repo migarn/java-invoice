@@ -12,6 +12,6 @@ public class BottleOfWine extends Product {
 
     @Override
     public BigDecimal getPriceWithTax() {
-        return this.getPrice().multiply(this.getTaxPercent()).add(this.getPrice()).add(excise);
+        return this.getPrice().multiply(this.getTaxPercent()).add(this.getPrice()).add(this.excise);
     }
 }

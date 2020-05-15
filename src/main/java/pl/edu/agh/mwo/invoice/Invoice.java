@@ -18,17 +18,17 @@ public class Invoice {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        if (products.containsKey(product)) {
-            products.replace(product, products.get(product) + quantity);
+        if (this.products.containsKey(product)) {
+            this.products.replace(product, this.products.get(product) + quantity);
         } else {
-            products.put(product, quantity);
+            this.products.put(product, quantity);
         }
     }
 
     public BigDecimal getNetTotal() {
         BigDecimal totalNet = BigDecimal.ZERO;
-        for (Product product : products.keySet()) {
-            BigDecimal quantity = new BigDecimal(products.get(product));
+        for (Product product : this.products.keySet()) {
+            BigDecimal quantity = new BigDecimal(this.products.get(product));
             totalNet = totalNet.add(product.getPrice().multiply(quantity));
         }
         return totalNet;
@@ -40,8 +40,8 @@ public class Invoice {
 
     public BigDecimal getGrossTotal() {
         BigDecimal totalGross = BigDecimal.ZERO;
-        for (Product product : products.keySet()) {
-            BigDecimal quantity = new BigDecimal(products.get(product));
+        for (Product product : this.products.keySet()) {
+            BigDecimal quantity = new BigDecimal(this.products.get(product));
             totalGross = totalGross.add(product.getPriceWithTax().multiply(quantity));
         }
         return totalGross;
@@ -55,7 +55,7 @@ public class Invoice {
         StringBuilder result = new StringBuilder();
         result.append("Faktura " + this.number + ":\n");
         for (Product product : this.products.keySet()) {
-            result.append("- " + product.getName() + ", sztuk: " + products.get(product)
+            result.append("- " + product.getName() + ", sztuk: " + this.products.get(product)
                 + ", cena netto za sztukę: " + product.getPrice() + " PLN\n");
         }
         result.append("Liczba pozycji: " + this.products.size());
