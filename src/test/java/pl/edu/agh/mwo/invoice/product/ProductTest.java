@@ -1,7 +1,9 @@
 package pl.edu.agh.mwo.invoice.product;
 
 import java.math.BigDecimal;
-
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -62,8 +64,26 @@ public class ProductTest {
     }
     
     @Test
-    public void testFuelCanisterWithTaxAndExcise() {
-        Product product = new FuelCanister("95", new BigDecimal("2"));
+    public void testFuelCanisterWithTaxAndExciseBeforeRoadmansDay() {
+    	Clock mockClock = Clock.fixed(Instant.parse("2021-04-25T23:50:00Z"),ZoneOffset.UTC);
+        FuelCanister product = new FuelCanister("95", new BigDecimal("2"));
+        product.setClock(mockClock);
+        Assert.assertThat(new BigDecimal("8.02"), Matchers.comparesEqualTo(product.getPriceWithTax()));
+    }
+    
+    @Test
+    public void testFuelCanisterWithTaxAndExciseOnRoadmansDay() {
+    	Clock mockClock = Clock.fixed(Instant.parse("2021-04-26T08:00:00Z"),ZoneOffset.UTC);
+        FuelCanister product = new FuelCanister("95", new BigDecimal("2"));
+        product.setClock(mockClock);
+        Assert.assertThat(new BigDecimal("2"), Matchers.comparesEqualTo(product.getPriceWithTax()));
+    }
+    
+    @Test
+    public void testFuelCanisterWithTaxAndExciseAfterRoadmansDay() {
+    	Clock mockClock = Clock.fixed(Instant.parse("2021-04-27T00:01:00Z"),ZoneOffset.UTC);
+        FuelCanister product = new FuelCanister("95", new BigDecimal("2"));
+        product.setClock(mockClock);
         Assert.assertThat(new BigDecimal("8.02"), Matchers.comparesEqualTo(product.getPriceWithTax()));
     }
 }
